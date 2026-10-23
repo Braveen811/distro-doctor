@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "distro-doctor"
+version = "1.0.0"
+description = "Multi-Distro CI/CD Validator for project installation steps"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "duckdb>=0.9.0",
+    "PyYAML>=6.0",
+]
+authors = [
+    { name = "Braveen R" }
+]
+
+[project.scripts]
+distro-doctor = "cli.main:main"
+
+[tool.setuptools.packages.find]
+include = ["cli*", "core*"]
+
+[tool.setuptools.package-data]
+core = ["translator/*.yml"]

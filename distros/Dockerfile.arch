@@ -1,0 +1,16 @@
+FROM archlinux:latest
+
+# Initialize keyring and install base tools without rolling full-upgrade overhead
+RUN pacman-key --init && \
+    pacman-key --populate archlinux && \
+    pacman -Sy --noconfirm archlinux-keyring && \
+    pacman -S --noconfirm --needed base-devel git curl wget python python-pip
+
+# Create a non-root user for security
+RUN useradd -m -s /bin/bash testuser && \
+    echo "testuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+USER testuser
+WORKDIR /home/testuser
+
+CMD ["/bin/bash"]

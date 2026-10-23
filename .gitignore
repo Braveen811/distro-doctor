@@ -1,0 +1,28 @@
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+sdist/
+var/
+wheels/
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Local DuckDB Analytics Database
+data/*.duckdb
+data/
+
+# OS-specific files
+.DS_Store
+Thumbs.db

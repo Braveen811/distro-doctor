@@ -1,0 +1,6 @@
+FROM alpine:latest
+RUN apk add --no-cache build-base git curl wget python3 py3-pip bash
+RUN adduser -D testuser && echo "testuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+USER testuser
+WORKDIR /home/testuser
+CMD ["/bin/bash"]

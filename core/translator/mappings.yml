@@ -1,0 +1,7 @@
+libssl-dev:
+  arch: openssl
+  fedora: openssl-devel
+  alpine: openssl-dev
+python3-pip:
+  arch: python-pip
+  alpine: py3-pip
