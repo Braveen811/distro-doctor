@@ -7,25 +7,28 @@ def extract_install_steps(readme_path):
     with open(readme_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    # Match code blocks with optional language specifier: ```lang\n...```
-    pattern = r"```([a-zA-Z0-9_-]*)\s*\n(.*?)```"
+    # 1. Universally capture ALL code blocks to prevent inverted matching.
+    # Group 1 = language tag (if any), Group 2 = inner content.
+    pattern = r"```([a-zA-Z0-9_+-]*)\s*\n(.*?)```"
     matches = re.findall(pattern, content, re.DOTALL)
     
     steps = []
     for lang, match in matches:
-        # Skip python/code examples as they are not shell installation scripts
-        if lang and lang.lower() in ["python", "py", "pycon", "json", "yaml", "yml", "javascript", "js"]:
+        lang = lang.strip().lower()
+        
+        # 2. Safely ignore non-shell languages
+        if lang in ["python", "py", "pycon", "json", "yaml", "yml", "js", "html", "css", "dockerfile"]:
             continue
             
-        lines = match.strip().splitlines()
-        for line in lines:
+        # 3. Process the valid shell/console/empty blocks
+        for line in match.strip().splitlines():
             line = line.strip()
             
-            # Skip empty lines, comments, or python REPL lines
-            if not line or line.startswith("#") or line.startswith(">>>") or line.startswith("..."):
+            # Filter out comments and Python REPL artifacts
+            if not line or line.startswith(("#", ">>>", "...")):
                 continue
                 
-            # Strip leading shell prompt symbols if present
+            # Strip standard shell prompt indicators
             if line.startswith("$ "):
                 line = line[2:].strip()
                 
