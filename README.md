@@ -182,7 +182,4 @@ Distributed under the MIT License.
 * **Local Mode (`distro-doctor run`)**: Instant validation for developers testing their own local workspace READMEs.
 * **Remote URL Mode (`distro-doctor test <url>`)**: Instant auditing for maintainers and beginners checking any public GitHub repository by URL without manual cloning.
 
-Distributed under the MIT License. Contributions, issues, and feature requests are welcome!
-
-
 See you in the terminal!
